@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+    
+  }
+  h1 {
+    color: red;
+    font-size: 40px;
+  }
+}
+
+.error {
+  visibility: hidden;
+}
+
+.bg-custom {
+  background-size: 100% 35%;
+}
+
+/* CARDS */
+.card-back-img {
+  transform: translateX(10%);
+}
+
+.card-back {
+  transform: translateY(4.5rem);
+  top: 0;
+  right: 0;
+}
+
+.card-front-img {
+  transform: translate(-10%, -30%);
+}
+
+.card-front {
+  top: 0;
+  left: 0;
+  transform: translateY(-1rem);
+}
+
+.card-data-front-logo {
+  transform: translate(-0%, -36%);
+}
+
+@media only screen and (min-width: 768px) {
+  .bg-custom {
+    background-size: 30% 100%;
+    }
+  .card-back-img {
+    transform: translate(10%, 100%);
+  }
+  .card-front-img {
+    transform: translate(-10%, -109%);
+  }
+  .card-back {
+    transform: translate(0%, 14.7rem);
+  }
+
+  .card-front {
+    transform: translateY(-155%);
+  }
+  .card-data-front-logo {
+  transform: translate(-0%, -77%);
+}
+ 
+}
+
+@media only screen and (min-width: 1024px) {
+  .card-back {
+    transform: translate(0%, 19.7rem);
+  }
+  .card-front {
+    transform: translate(0%, -153%);
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <title>Frontend Mentor | Interactive card details form</title>
+</head>
+
+<body>
+  <main class="card_form">
+    <section
+      class="card-information bg-[url('/images/bg-main-mobile.png')] bg-custom md:flex md:items-center md:bg-[url('/images/bg-main-desktop.png')] bg-no-repeat md:min-h-screen pt-8 lg:pt-0">
+      <div class="basis-2/4">
+        <div class="relative mx-auto w-[300px] lg:w-[400px]">
+          <img src="/images/bg-card-back.png" alt="card back" class="flex w-full card-back-img">
+
+          <div class="absolute card-back">
+            <span id="spanCVC" class="block text-white tracking-wider text-sm">000</span>
+          </div>
+        </div>
+        <div class="relative mx-auto w-[300px] lg:w-[400px]">
+          <img src="/images/bg-card-front.png" alt="card front" class="flex w-full card-front-img">
+          <div class="absolute card-front w-full flex flex-col items-start">
+            <div class="md:h-[20px] lg:h-auto">
+              <img src="/images/card-logo.svg" alt="card_logo" class="max-w-[70px] top-0 card-data-front-logo">
+            </div>
+            <div>
+              <span id="spanNumber" class="text-white text-lg tracking-widest">0000 0000 00000 0000</span>
+            </div>
+
+            <div class="flex flex-row justify-between w-[250px] text-white pt-[10px]">
+              <span id="spanName" class="text-xs uppercase font-light tracking-widest">Jane Aplleseed</span>
+              <div>
+                <span id="spanMonth" class="text-xs font-light tracking-widest">00</span>
+                <span class="text-xs">/</span>
+                <span id="spanYear" class="text-xs font-light tracking-widest">00</span>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form basis-2/4 max-w-[400px] mx-auto">
+        <form id="cardForm" onsubmit="return false;" method="POST">
+          <div id="formGroup" class="flex-row wrap justify-center items-center px-4">
+            <div class="relative flex flex-col pb-6">
+              <label for="userName" class="uppercase tracking-widest pb-2 text-sm">Cardholder name</label>
+              <input autocomplete="off" type="text" id="userName" name="name" placeholder="e.g. Jane Appleseed" required
+                class="border rounded px-1 py-1 placeholder:font-light tracking-wider h-[40px] outline-none">
+              <span id="errorName" class="absolute block text-xs bottom-0 text-red error">wrong name</span>
+            </div>
+            <div class="relative flex flex-col pb-6">
+              <label for="cardNumber" class="uppercase tracking-widest pb-2 text-sm">Card Number</label>
+              <input autocomplete="off" name="card_number" id="cardNumber" placeholder="e.g. 1234 5678 9123 0000"
+                required class="border rounded px-1 py-1 placeholder:font-light tracking-wider h-[40px] outline-none">
+              <span id="errorCard" class="absolute block text-xs bottom-0 text-red error">Wrong card number</span>
+            </div>
+
+            <div class="flex flex-row gap-1 pb-6 justify-between items-center">
+              <div class="relative basis-full">
+                <label for="mm" class="uppercase tracking-widest pb-2 text-xs sm:text-sm">Exp. date (mm/yy)</label>
+                <div class="flex flex-row gap-2">
+                  <input id="month" autocomplete="off" name="mm" placeholder="MM"
+                    class="border rounded px-1 py-1 placeholder:font-light tracking-wider h-[40px]  w-16 outline-none"
+                    required>
+                  <input autocomplete="off" name="yy" id="year" placeholder="YY" required
+                    class="border rounded px-1 py-1 placeholder:font-light tracking-wider h-[40px] w-16 outline-none">
+                </div>
+                <span id="errorDate" class="absolute block text-xs text-red error">Wrong card date</span>
+              </div>
+              <div class="relative basis-full">
+                <label for="cvc" class="uppercase tracking-widest pb-2 text-sm">cvc</label>
+                <input autocomplete="off" pattern="[0-9]*" name="cvc" id="cvc" placeholder="e.g.123"
+                  class="border rounded px-1 py-1 w-full placeholder:font-light tracking-wider h-[40px] outline-none"
+                  required>
+                <span id="errorCvc" class="absolute block text-xs text-red error">Can't be blank</span>
+              </div>
+            </div>
+
+            <div class="w-full">
+              <button type="submit" onclick="validate();"
+                class="bg-darkViolet text-white text-xl px-4 py-4 w-full border rounded-md border-r-8 border-darkViolet hover:drop-shadow-lg"
+                id="submit">
+                Confirm
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="modal" class=" pb-[71px] text-center m-w-[500px] mx-[40px] bg-white hidden my-auto">
+          <img src="/images/icon-complete.svg" alt="complete" class="mx-auto pb-4">
+          <span class="inline-block uppercase font-bold text-3xl pb-4">Thank you!</span>
+          <p class="text-lg text-darkGray pb-8">We've added your card details</p>
+          <button onclick="reset();" type="reset"
+            class="bg-darkViolet text-white text-xl px-[5rem] h-[3.5rem] leading-[3.5rem] border rounded-xl border-darkViolet hover:drop-shadow-lg">Continue</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="cleave.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
